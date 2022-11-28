@@ -57,7 +57,7 @@ export class Screen {
         Screen.context.mouseEvent.y = event.clientY;
         Screen.context.mouseEventType = MouseEventType.Click;
 
-        this.render();
+        this.update();
       }
     });
 
@@ -88,6 +88,12 @@ export class Screen {
     this.children.forEach(child => {
       child.layout(Screen.context);
       child.render(Screen.context);
+    });
+  }
+
+  update() {
+    this.children.forEach(child => {
+      child.update(Screen.context);
     });
 
     Screen.context.mouseEventType = MouseEventType.None;

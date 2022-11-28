@@ -5,6 +5,7 @@ import { Row } from './core/row';
 import { Rect } from './core/rect';
 import { CustomWidget } from './custom';
 import { StateWidget } from './state';
+import { State2Widget } from './state2';
 
 const screen = new Screen({
   children: [
@@ -52,6 +53,10 @@ const screen = new Screen({
     new StateWidget({
       x: 10,
       y: 500
+    }),
+    new State2Widget({
+      x: 10,
+      y: 600
     })
   ]
 });

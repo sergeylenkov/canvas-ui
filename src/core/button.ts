@@ -1,4 +1,4 @@
-import { ScreenContext } from './screen';
+import { MouseEventType, ScreenContext } from './screen';
 import { Rect } from './rect';
 import { Text } from './text';
 import { Widget, WidgetOptions } from './widget';
@@ -9,8 +9,12 @@ export interface ButtonOptions extends WidgetOptions {
 }
 
 export class Button extends Widget {
+  private onClick: () => void;
+
   constructor(options: ButtonOptions) {
     super(options);
+
+    this.onClick = options.onClick;
 
     this.children = [
       new Rect({
@@ -33,13 +37,27 @@ export class Button extends Widget {
     const rect = this.children[0];
     const text = this.children[1];
 
-    const centerY = rect.height / 2;
-    const centerX = rect.width / 2;
+    const centerY = this.height / 2;
+    const centerX = this.width / 2;
 
     rect.x = this.x;
     rect.y = this.y;
 
     text.y = rect.y + centerY - text.height / 2;
     text.x = rect.x + centerX - text.width / 2;
+  }
+
+  public update(context: ScreenContext): void {
+    super.update(context);
+
+    if (context.mouseEventType === MouseEventType.Click) {
+      const rect = this.children[0];
+
+      if (context.mouseEvent.x >= this.x && context.mouseEvent.x <= this.x + this.width) {
+        if (context.mouseEvent.y >= this.y && context.mouseEvent.y <= this.y + this.height) {
+          this.onClick();
+        }
+      }
+    }
   }
 }

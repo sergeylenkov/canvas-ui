@@ -43,6 +43,13 @@ export class Widget {
     });
   }
 
+  public update(context: ScreenContext) {
+    console.log(`layout widget ${this.constructor.name} ${this.id}`);
+    this.children.forEach(child => {
+      child.update(context);
+    });
+  }
+  
   public render(context: ScreenContext) {
     console.log(`render widget ${this.constructor.name} ${this.id}, ${this.x, this.y}`);
     this.children.forEach(child => {

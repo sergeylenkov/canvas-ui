@@ -1,8 +1,9 @@
+import { Observer } from './observer';
 import { ScreenContext } from './screen';
 import { Widget, WidgetOptions } from './widget';
 
 export interface TextOptions extends WidgetOptions {
-  text: string;
+  text: string | Observer<string>;
   size?: number;
   color?: string;
   bold?: boolean;
@@ -14,14 +15,28 @@ export class Text extends Widget {
   private size: number = 12;
   private bold: boolean = false;
   private fontName: string = 'system-ui';
+  private observer?: Observer<string>;
 
   constructor(options: TextOptions) {
     super(options);
 
-    this.text = options.text;
     this.color = options.color || 'rgb(0,0,0)';
     this.size = options.size || 12;
     this.bold = options.bold || false;
+
+    if (typeof options.text === 'string') {
+      this.text = options.text;
+    } else if (options.text instanceof Observer) {
+      this.observer = options.text;
+      this.text = this.observer!.value;
+      
+      this.observer.delegate = () => {
+        this.width = 0;
+        this.height = 0;
+        
+        this.text = this.observer!.value;
+      }
+    }
   }
 
   private setFontStyle(context: ScreenContext) {
