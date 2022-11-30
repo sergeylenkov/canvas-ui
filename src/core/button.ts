@@ -43,8 +43,8 @@ export class Button extends Widget {
     rect.x = this.x;
     rect.y = this.y;
 
-    text.y = rect.y + centerY - text.height / 2;
-    text.x = rect.x + centerX - text.width / 2;
+    text.y = Math.floor(rect.y + centerY - text.height / 2);
+    text.x = Math.floor(rect.x + centerX - text.width / 2);
   }
 
   public update(context: ScreenContext): void {

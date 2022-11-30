@@ -21,8 +21,8 @@ export class Row extends Widget {
       }
     });
 
-    this.width = width;
-    this.height = height;
+    this.width = Math.floor(width);
+    this.height = Math.floor(height);
 
     super.layout(context);
   }

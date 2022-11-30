@@ -29,11 +29,11 @@ export class Text extends Widget {
     } else if (options.text instanceof Observer) {
       this.observer = options.text;
       this.text = this.observer!.value;
-      
+
       this.observer.delegate = () => {
         this.width = 0;
         this.height = 0;
-        
+
         this.text = this.observer!.value;
       }
     }
@@ -51,8 +51,8 @@ export class Text extends Widget {
 
       const measure = context.renderContext.measureText(this.text);
 
-      this.width = measure.width;
-      this.height = measure.fontBoundingBoxDescent;
+      this.width = Math.floor(measure.width);
+      this.height = Math.floor(measure.fontBoundingBoxDescent);
     }
 
     super.layout(context);

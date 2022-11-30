@@ -49,11 +49,16 @@ export class Widget {
       child.update(context);
     });
   }
-  
+
   public render(context: ScreenContext) {
-    console.log(`render widget ${this.constructor.name} ${this.id}, ${this.x, this.y}`);
+    console.log(`render widget ${this.constructor.name} ${this.id}, ${this.x}, ${this.y}`);
     this.children.forEach(child => {
       child.shouldRender && child.render(context);
     });
+  }
+
+  protected clear(context: ScreenContext) {
+    console.log(`clear widget ${this.constructor.name} ${this.id}, ${this.x}, ${this.y} (${this.width} ${this.height})`);
+    context.renderContext.clearRect(this.x, this.y, this.width, this.height);
   }
 }
