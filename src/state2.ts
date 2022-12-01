@@ -1,10 +1,11 @@
 import { Button } from './core/button';
 import { Text } from './core/text';
-import { Widget, WidgetOptions } from './core/widget';
+import { WidgetOptions } from './core/widget';
 import { Row } from './core/row';
 import { Screen, ScreenContext } from './core/screen';
+import { TextStyle } from './core/text-style';
 
-export class State2Widget extends Widget {
+export class State2Widget extends Row {
   private count = 0;
 
   constructor(options: WidgetOptions) {
@@ -15,28 +16,20 @@ export class State2Widget extends Widget {
 
   public rerender(options: WidgetOptions): void {
     this.children = [
-        new Row({
-          x: options.x,
-          y: options.y,
-          children: [
-            new Text({
-              text: `Counter2: ${this.count}`,
-              color: 'rgb(0,0,0)',
-              size: 14,
-              bold: true
-            }),
-            new Button({
-              width: 100,
-              height: 50,
-              title: 'Click',
-              onClick: () => {
-                this.count++;
-                this.rerender(options);
-              }
-            })
-          ]
-        })
-      ]
+      new Text({
+        text: `Counter2: ${this.count}`,
+        style: new TextStyle({ color: 'rgb(0,0,0)', size: 14, bold: true })
+      }),
+      new Button({
+        width: 100,
+        height: 50,
+        title: 'Click',
+        onClick: () => {
+          this.count++;
+          this.rerender(options);
+        }
+      })
+    ]
 
     if (Screen.context) {
         this.layout(Screen.context);
@@ -44,15 +37,8 @@ export class State2Widget extends Widget {
     }
   }
 
-  public layout(context: ScreenContext): void {
-    super.layout(context);
-
-    this.width = this.children[0].width;
-    this.height = this.children[0].height;
-  }
-
   public render(context: ScreenContext): void {
-    context.renderContext.clearRect(this.x, this.y, this.width, this.height);
+    this.clear(context);
     super.render(context);
   }
 }

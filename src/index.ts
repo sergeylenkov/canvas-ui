@@ -6,6 +6,9 @@ import { Rect } from './core/rect';
 import { CustomWidget } from './custom';
 import { StateWidget } from './state';
 import { State2Widget } from './state2';
+import { TextStyle } from './core/text-style';
+
+const defaultTextStyle = new TextStyle({ color: 'rgb(0,0,0)', size: 14,  bold: false });
 
 const screen = new Screen({
   children: [
@@ -13,26 +16,24 @@ const screen = new Screen({
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
       text: `Hello world!`,
-      color: 'rgb(150,10,10)',
-      size: 24,
-      bold: true
+      style: new TextStyle({ color: 'rgb(150,10,10)', size: 24,  bold: true })
     }),
     new Column({
       x: 10,
       y: 50,
       children: [
-        new Text({ text: `Line 1`, size: 14, x: 0, y: 0 }),
-        new Text({ text: `Line 2`, size: 14, x: 0, y: 0 }),
-        new Text({ text: `Line 3`, size: 14, x: 0, y: 0 }),
+        new Text({ text: `Line 1`, style: defaultTextStyle }),
+        new Text({ text: `Line 2`, style: defaultTextStyle }),
+        new Text({ text: `Line 3`, style: defaultTextStyle }),
       ]
     }),
     new Row({
       x: 10,
       y: 200,
       children: [
-        new Text({ text: `Row 1`, size: 14, x: 0, y: 0 }),
-        new Text({ text: `Row 2`, size: 14, x: 0, y: 0 }),
-        new Text({ text: `Row 3`, size: 14, x: 0, y: 0 }),
+        new Text({ text: `Row 1`, style: defaultTextStyle }),
+        new Text({ text: `Row 2`, style: defaultTextStyle }),
+        new Text({ text: `Row 3`, style: defaultTextStyle }),
       ]
     }),
     new Rect(

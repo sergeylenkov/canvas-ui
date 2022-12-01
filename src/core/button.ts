@@ -2,6 +2,7 @@ import { MouseEventType, ScreenContext } from './screen';
 import { Rect } from './rect';
 import { Text } from './text';
 import { Widget, WidgetOptions } from './widget';
+import { TextStyle } from './text-style';
 
 export interface ButtonOptions extends WidgetOptions {
   title: string;
@@ -24,9 +25,7 @@ export class Button extends Widget {
       }),
       new Text({
         text: options.title,
-        color: 'rgb(255,255,255)',
-        size: 14,
-        bold: true
+        style: new TextStyle({ color: 'rgb(255,255,255)', size: 14, bold: true })
       }),
     ]
   }

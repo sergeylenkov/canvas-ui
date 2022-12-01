@@ -1,28 +1,22 @@
 import { Observer } from './observer';
 import { ScreenContext } from './screen';
+import { TextStyle } from './text-style';
 import { Widget, WidgetOptions } from './widget';
 
 export interface TextOptions extends WidgetOptions {
   text: string | Observer<string>;
-  size?: number;
-  color?: string;
-  bold?: boolean;
+  style: TextStyle;
 }
 
 export class Text extends Widget {
   private text: string = '';
-  private color: string = 'rgb(0,0,0)';
-  private size: number = 12;
-  private bold: boolean = false;
-  private fontName: string = 'system-ui';
+  private style: TextStyle;
   private observer?: Observer<string>;
 
   constructor(options: TextOptions) {
     super(options);
 
-    this.color = options.color || 'rgb(0,0,0)';
-    this.size = options.size || 12;
-    this.bold = options.bold || false;
+    this.style = options.style;
 
     if (typeof options.text === 'string') {
       this.text = options.text;
@@ -40,7 +34,8 @@ export class Text extends Widget {
   }
 
   private setFontStyle(context: ScreenContext) {
-    context.renderContext.font = `${this.bold ? 'bold' : ''} ${this.size}px ${this.fontName}`;
+    console.log(this.style.build());
+    context.renderContext.font = this.style.build();
     context.renderContext.textBaseline = 'top';
     context.renderContext.textAlign = 'start';
   }
@@ -61,7 +56,7 @@ export class Text extends Widget {
   public render(context: ScreenContext) {
     this.setFontStyle(context);
 
-    context.renderContext.fillStyle = this.color;
+    context.renderContext.fillStyle = this.style.color;
     context.renderContext.fillText(this.text, this.x, this.y);
 
     super.render(context);

@@ -4,6 +4,7 @@ import { WidgetOptions } from './core/widget';
 import { Row } from './core/row';
 import { Observer } from './core/observer';
 import { Screen, ScreenContext } from './core/screen';
+import { TextStyle } from './core/text-style';
 
 export class StateWidget extends Row {
   private counter = new Observer<string>('Count: 0');
@@ -15,9 +16,7 @@ export class StateWidget extends Row {
     this.children = [
       new Text({
         text: this.counter,
-        color: 'rgb(0,0,0)',
-        size: 14,
-        bold: true
+        style: new TextStyle({color: 'rgb(0,0,0)', size: 14,  bold: true })
       }),
       new Button({
         width: 80,

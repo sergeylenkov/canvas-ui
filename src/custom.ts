@@ -2,6 +2,7 @@ import { ScreenContext } from './core/screen';
 import { Rect } from './core/rect';
 import { Text } from './core/text';
 import { Widget, WidgetOptions } from './core/widget';
+import { TextStyle } from './core/text-style';
 
 export class CustomWidget extends Widget {
   constructor(options: WidgetOptions) {
@@ -16,12 +17,8 @@ export class CustomWidget extends Widget {
         backgroundColor: 'rgb(50, 100, 100)'
       }),
       new Text({
-        x: 0,
-        y: 0,
         text: 'Button',
-        color: 'rgb(255,255,255)',
-        size: 14,
-        bold: true
+        style: new TextStyle({ color: 'rgb(255,255,255)', size: 14, bold: true })
       }),
     ]
   }
