@@ -37,28 +37,28 @@ export class Widget {
   }
 
   public layout(context: ScreenContext) {
-    console.log(`layout widget ${this.constructor.name} ${this.id}`);
+    //console.log(`layout widget ${this.constructor.name} ${this.id}`);
     this.children.forEach(child => {
       child.layout(context);
     });
   }
 
   public update(context: ScreenContext) {
-    console.log(`layout widget ${this.constructor.name} ${this.id}`);
+    //console.log(`layout widget ${this.constructor.name} ${this.id}`);
     this.children.forEach(child => {
       child.update(context);
     });
   }
 
   public render(context: ScreenContext) {
-    console.log(`render widget ${this.constructor.name} ${this.id}, ${this.x}, ${this.y}`);
+    //console.log(`render widget ${this.constructor.name} ${this.id}, ${this.x}, ${this.y}`);
     this.children.forEach(child => {
       child.shouldRender && child.render(context);
     });
   }
 
   protected clear(context: ScreenContext) {
-    console.log(`clear widget ${this.constructor.name} ${this.id}, ${this.x}, ${this.y} (${this.width} ${this.height})`);
+    //console.log(`clear widget ${this.constructor.name} ${this.id}, ${this.x}, ${this.y} (${this.width} ${this.height})`);
     context.renderContext.clearRect(this.x, this.y, this.width, this.height);
   }
 }

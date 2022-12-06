@@ -34,7 +34,7 @@ export class Text extends Widget {
   }
 
   private setFontStyle(context: ScreenContext) {
-    console.log(this.style.build());
+    //console.log(this.style.build());
     context.renderContext.font = this.style.build();
     context.renderContext.textBaseline = 'top';
     context.renderContext.textAlign = 'start';
