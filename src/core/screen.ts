@@ -18,7 +18,10 @@ export interface ScreenContext {
     y: number;
   };
   mouseEventType: MouseEventType;
-  mouseWheel: number;
+  mouseWheel: {
+    x: number;
+    y: number;
+  };
   width: number;
   height: number;
 }
@@ -40,9 +43,9 @@ export class Screen {
 
     Screen.context = {
       renderContext: context,
-      mouseEvent: {x: 0, y: 0},
+      mouseEvent: { x: 0, y: 0 },
       mouseEventType: MouseEventType.None,
-      mouseWheel: 0,
+      mouseWheel: { x: 0, y: 0},
       width: window.innerWidth,
       height: window.innerHeight
     }
@@ -62,7 +65,7 @@ export class Screen {
     });
 
     window.addEventListener('wheel', (event) => {
-      Screen.context.mouseWheel = Screen.context.mouseWheel + event.deltaY * -0.1;
+      Screen.context.mouseWheel = { x: event.deltaX, y: event.deltaY };
       this.render();
     });
 

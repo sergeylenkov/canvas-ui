@@ -37,7 +37,7 @@ export class Cards extends CollectionView {
     super(options);
 
     let index = 0;
-    const items = new Array(100).fill(0).map(i => ++index);
+    const items = new Array(400).fill(0).map(i => ++index);
 
     this.children = []
 
